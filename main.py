@@ -7,21 +7,9 @@ def show_stats(player_name, money, energy, mood, reputation):
     print(f"Reputation: {reputation}")
 
 
-def main():
-    print("Welcome to Big City.")
-    print("You have fourteen days to build a life.\n")
-
-    player_name = input("What is your name? ")
-
-    money = 100
-    energy = 100
-    mood = 50
-    reputation = 0
-
-    print(f"\nWelcome to the city, {player_name}.")
-    show_stats(player_name, money, energy, mood, reputation)
-
-    print("\nWhat would you like to do this morning?")
+def choose_activity(time_slot, money, energy, mood, reputation):
+    print(f"\n--- {time_slot} ---")
+    print("\nWhat would you like to do?")
     print("1. Work a temp shift")
     print("2. Rest at your apartment")
     print("3. Visit the coffee shop")
@@ -49,11 +37,51 @@ def main():
         energy -= 5
         mood += 10
     else:
-        print("\nYou hesitate too long and lose the morning to indecision.")
+        print("\nYou hesitate too long and lose this part of the day to indecision.")
+
+    return money, energy, mood, reputation
+
+
+def main():
+    print("Welcome to Big City.")
+    print("You have fourteen days to build a life.\n")
+
+    player_name = input("What is your name? ")
+
+    money = 100
+    energy = 100
+    mood = 50
+    reputation = 0
+    day = 1
+
+    print(f"\nWelcome to the city, {player_name}.")
+    print(f"Day {day} begins.")
 
     show_stats(player_name, money, energy, mood, reputation)
 
-    print("\nEnd of prototype turn.")
+    money, energy, mood, reputation = choose_activity(
+        "Morning", money, energy, mood, reputation
+    )
+    show_stats(player_name, money, energy, mood, reputation)
+
+    money, energy, mood, reputation = choose_activity(
+        "Afternoon", money, energy, mood, reputation
+    )
+    show_stats(player_name, money, energy, mood, reputation)
+
+    money, energy, mood, reputation = choose_activity(
+        "Evening", money, energy, mood, reputation
+    )
+    show_stats(player_name, money, energy, mood, reputation)
+
+    print(f"\nDay {day} ends.")
+    print("You look out at the city lights and wonder what tomorrow will ask of you.")
+
+    print("\n--- Day Summary ---")
+    print(f"Money: ${money}")
+    print(f"Energy: {energy}")
+    print(f"Mood: {mood}")
+    print(f"Reputation: {reputation}")
 
 
 if __name__ == "__main__":
