@@ -1,3 +1,11 @@
+def clamp_stat(value, minimum, maximum):
+    if value < minimum:
+        return minimum
+    elif value > maximum:
+        return maximum
+    else:
+        return value
+
 def show_stats(player_name, money, energy, mood, reputation):
     print("\n--- Player Stats ---")
     print(f"Name: {player_name}")
@@ -38,6 +46,11 @@ def choose_activity(time_slot, money, energy, mood, reputation):
         mood += 10
     else:
         print("\nYou hesitate too long and lose this part of the day to indecision.")
+
+    money = clamp_stat(money, 0, 9999)
+    energy = clamp_stat(energy, 0, 100)
+    mood = clamp_stat(mood, 0, 100)
+    reputation = clamp_stat(reputation, 0, 100)
 
     return money, energy, mood, reputation
 
