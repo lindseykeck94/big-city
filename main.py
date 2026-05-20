@@ -22,6 +22,7 @@ def choose_activity(time_slot, money, energy, mood, reputation):
     print("2. Rest at your apartment")
     print("3. Visit the coffee shop")
     print("4. Walk through the park")
+    print("5. Go to a concert")
 
     choice = input("\nChoose an option: ")
 
@@ -44,6 +45,11 @@ def choose_activity(time_slot, money, energy, mood, reputation):
         print("\nYou walk through the park and pet a few dogs.")
         energy -= 5
         mood += 10
+    elif choice == "5":
+        print("\nYou see an indie band play at an overpriced venue. It's really loud.")
+        money -= 20
+        energy -= 15
+        mood += 25
     else:
         print("\nYou dissociate and lose track of time.")
 
