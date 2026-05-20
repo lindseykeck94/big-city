@@ -42,6 +42,17 @@ def choose_activity(time_slot, money, energy, mood, reputation):
     return money, energy, mood, reputation
 
 
+def show_day_summary(day, money, energy, mood, reputation):
+    print(f"\nDay {day} ends.")
+    print("You look out at the city lights and wonder what tomorrow will ask of you.")
+
+    print("\n--- Day Summary ---")
+    print(f"Money: ${money}")
+    print(f"Energy: {energy}")
+    print(f"Mood: {mood}")
+    print(f"Reputation: {reputation}")
+
+
 def main():
     print("Welcome to Big City.")
     print("You have fourteen days to build a life.\n")
@@ -55,29 +66,36 @@ def main():
     day = 1
 
     print(f"\nWelcome to the city, {player_name}.")
-    print(f"Day {day} begins.")
 
-    show_stats(player_name, money, energy, mood, reputation)
+    while day <= 3:
+        print(f"\n====================")
+        print(f"Day {day}")
+        print(f"====================")
 
-    money, energy, mood, reputation = choose_activity(
-        "Morning", money, energy, mood, reputation
-    )
-    show_stats(player_name, money, energy, mood, reputation)
+        show_stats(player_name, money, energy, mood, reputation)
 
-    money, energy, mood, reputation = choose_activity(
-        "Afternoon", money, energy, mood, reputation
-    )
-    show_stats(player_name, money, energy, mood, reputation)
+        money, energy, mood, reputation = choose_activity(
+            "Morning", money, energy, mood, reputation
+        )
+        show_stats(player_name, money, energy, mood, reputation)
 
-    money, energy, mood, reputation = choose_activity(
-        "Evening", money, energy, mood, reputation
-    )
-    show_stats(player_name, money, energy, mood, reputation)
+        money, energy, mood, reputation = choose_activity(
+            "Afternoon", money, energy, mood, reputation
+        )
+        show_stats(player_name, money, energy, mood, reputation)
 
-    print(f"\nDay {day} ends.")
-    print("You look out at the city lights and wonder what tomorrow will ask of you.")
+        money, energy, mood, reputation = choose_activity(
+            "Evening", money, energy, mood, reputation
+        )
+        show_stats(player_name, money, energy, mood, reputation)
 
-    print("\n--- Day Summary ---")
+        show_day_summary(day, money, energy, mood, reputation)
+
+        day += 1
+
+    print("\nFourteen days pass.")
+    print("Your first chapter in Big City comes to an end.")
+    print("\nFinal stats:")
     print(f"Money: ${money}")
     print(f"Energy: {energy}")
     print(f"Mood: {mood}")
