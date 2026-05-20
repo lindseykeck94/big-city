@@ -80,29 +80,10 @@ def main():
 
     print(f"\nWelcome to the city, {player_name}.")
 
-    while day <= 3:
-        print(f"\n====================")
-        print(f"Day {day}")
-        print(f"====================")
-
-        show_stats(player_name, money, energy, mood, reputation)
-
-        money, energy, mood, reputation = choose_activity(
-            "Morning", money, energy, mood, reputation
+    while day <= 14:
+        money, energy, mood, reputation = play_day(
+            day, player_name, money, energy, mood, reputation
         )
-        show_stats(player_name, money, energy, mood, reputation)
-
-        money, energy, mood, reputation = choose_activity(
-            "Afternoon", money, energy, mood, reputation
-        )
-        show_stats(player_name, money, energy, mood, reputation)
-
-        money, energy, mood, reputation = choose_activity(
-            "Evening", money, energy, mood, reputation
-        )
-        show_stats(player_name, money, energy, mood, reputation)
-
-        show_day_summary(day, money, energy, mood, reputation)
 
         day += 1
 
@@ -116,4 +97,33 @@ def main():
 
 
 if __name__ == "__main__":
+
+   def play_day(day, player_name, money, energy, mood, reputation):
+    print(f"\n====================")
+    print(f"Day {day}")
+    print(f"====================")
+
+    show_stats(player_name, money, energy, mood, reputation)
+
+    money, energy, mood, reputation = choose_activity(
+        "Morning", money, energy, mood, reputation
+    )
+    show_stats(player_name, money, energy, mood, reputation)
+
+    money, energy, mood, reputation = choose_activity(
+        "Afternoon", money, energy, mood, reputation
+    )
+    show_stats(player_name, money, energy, mood, reputation)
+
+    money, energy, mood, reputation = choose_activity(
+        "Evening", money, energy, mood, reputation
+    )
+    show_stats(player_name, money, energy, mood, reputation)
+
+    show_day_summary(day, money, energy, mood, reputation)
+
+    return money, energy, mood, reputation
+   
+   if __name__ == "__main__":
     main()
+  
