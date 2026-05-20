@@ -26,26 +26,26 @@ def choose_activity(time_slot, money, energy, mood, reputation):
     choice = input("\nChoose an option: ")
 
     if choice == "1":
-        print("\nYou take a temp shift filing paperwork in a fluorescent office.")
+        print("\nYou take a temp shift filing paperwork at an office. There's a watercooler.")
         money += 65
         energy -= 25
         mood -= 5
         reputation += 5
     elif choice == "2":
-        print("\nYou stay in bed a little longer and let the city move without you.")
+        print("\nYou silence your alarm and catch some zzzs.")
         energy += 30
         mood += 5
     elif choice == "3":
-        print("\nYou visit the coffee shop and buy a drink you probably cannot afford.")
+        print("\nYou visit the coffee shop and buy an overpriced latte. At least the foam art was pretty.")
         money -= 4
         energy += 10
         mood += 5
     elif choice == "4":
-        print("\nYou walk through the park and let yourself breathe for a while.")
+        print("\nYou walk through the park and pet a few dogs.")
         energy -= 5
         mood += 10
     else:
-        print("\nYou hesitate too long and lose this part of the day to indecision.")
+        print("\nYou dissociate and lose track of time.")
 
     money = clamp_stat(money, 0, 9999)
     energy = clamp_stat(energy, 0, 100)
