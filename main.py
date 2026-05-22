@@ -15,9 +15,44 @@ def show_stats(player_name, money, energy, mood, reputation):
     print(f"Mood: {mood}")
     print(f"Reputation: {reputation}")
 
+def choose_location():
+    print("\nWhere would you like to go?")
+    print("1. Apartment")
+    print("2. Coffee Shop")
+    print("3. Temp Agency")
+    print("4. Bookstore")
+    print("5. Park/Subway Station")
+    print("6. Music Venue")
+
+    choice = input("\nChoose a location: ")
+
+    if choice == "1":
+        print("\nYou return to your overpriced studio. It is small, but it is yours for now.")
+        return "Apartment"
+    elif choice == "2":
+        print("\nYou step into the coffee shop. The windows are fogged with rain and conversation.")
+        return "Coffee Shop"
+    elif choice == "3":
+        print("\nYou arrive at the temp agency. The fluorescent lights hum, and yes, there is a watercooler.")
+        return "Temp Agency"
+    elif choice == "4":
+        print("\nYou enter the bookstore. The shelves lean slightly, crowded with paperbacks and possibility.")
+        return "Bookstore"
+    elif choice == "5":
+        print("\nYou make your way toward the park and subway entrance, where the city seems to breathe around you.")
+        return "Park/Subway Station"
+    elif choice == "6":
+        print("\nYou find a small music venue tucked between a laundromat and a closed pharmacy.")
+        return "Music Venue"
+    else:
+        print("\nYou wander without choosing a clear destination.")
+        return "Nowhere"
 
 def choose_activity(time_slot, money, energy, mood, reputation):
     print(f"\n--- {time_slot} ---")
+
+    location = choose_location()
+    
     print("\nWhat would you like to do?")
     print("1. Work a temp shift")
     print("2. Rest at your apartment")
