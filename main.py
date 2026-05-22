@@ -6,6 +6,7 @@ def clamp_stat(value, minimum, maximum):
     else:
         return value
 
+
 def show_stats(player_name, money, energy, mood, reputation):
     print("\n--- Player Stats ---")
     print(f"Name: {player_name}")
@@ -22,7 +23,7 @@ def choose_activity(time_slot, money, energy, mood, reputation):
     print("2. Rest at your apartment")
     print("3. Visit the coffee shop")
     print("4. Walk through the park")
-    print("5. Go to a concert")
+    print("5. Explore the city")
 
     choice = input("\nChoose an option: ")
 
@@ -46,30 +47,59 @@ def choose_activity(time_slot, money, energy, mood, reputation):
         energy -= 5
         mood += 10
     elif choice == "5":
-        print("\nYou see an indie band play at an overpriced venue. It's really loud.")
+        print("\nYou wander the city streets and find a hidden gem of a record store.")
+        print("You buy a vinyl of an obscure band you've never heard of.")
         money -= 20
         energy -= 15
         mood += 25
+        reputation += 3
     else:
         print("\nYou dissociate and lose track of time.")
 
     money = clamp_stat(money, 0, 9999)
     energy = clamp_stat(energy, 0, 100)
     mood = clamp_stat(mood, 0, 100)
-    reputation = clamp_stat(reputation, 0, 100)
+    reputation = clamp_stat(reputation, -100, 100)
 
     return money, energy, mood, reputation
 
 
 def show_day_summary(day, money, energy, mood, reputation):
     print(f"\nDay {day} ends.")
-    print("You look out at the city lights and wonder what tomorrow will ask of you.")
+    print("You look out at the city lights and wonder what tomorrow will bring.")
 
     print("\n--- Day Summary ---")
     print(f"Money: ${money}")
     print(f"Energy: {energy}")
     print(f"Mood: {mood}")
     print(f"Reputation: {reputation}")
+
+
+def play_day(day, player_name, money, energy, mood, reputation):
+    print("\n====================")
+    print(f"Day {day}")
+    print("====================")
+
+    show_stats(player_name, money, energy, mood, reputation)
+
+    money, energy, mood, reputation = choose_activity(
+        "Morning", money, energy, mood, reputation
+    )
+    show_stats(player_name, money, energy, mood, reputation)
+
+    money, energy, mood, reputation = choose_activity(
+        "Afternoon", money, energy, mood, reputation
+    )
+    show_stats(player_name, money, energy, mood, reputation)
+
+    money, energy, mood, reputation = choose_activity(
+        "Evening", money, energy, mood, reputation
+    )
+    show_stats(player_name, money, energy, mood, reputation)
+
+    show_day_summary(day, money, energy, mood, reputation)
+
+    return money, energy, mood, reputation
 
 
 def main():
@@ -103,33 +133,4 @@ def main():
 
 
 if __name__ == "__main__":
-
-   def play_day(day, player_name, money, energy, mood, reputation):
-    print(f"\n====================")
-    print(f"Day {day}")
-    print(f"====================")
-
-    show_stats(player_name, money, energy, mood, reputation)
-
-    money, energy, mood, reputation = choose_activity(
-        "Morning", money, energy, mood, reputation
-    )
-    show_stats(player_name, money, energy, mood, reputation)
-
-    money, energy, mood, reputation = choose_activity(
-        "Afternoon", money, energy, mood, reputation
-    )
-    show_stats(player_name, money, energy, mood, reputation)
-
-    money, energy, mood, reputation = choose_activity(
-        "Evening", money, energy, mood, reputation
-    )
-    show_stats(player_name, money, energy, mood, reputation)
-
-    show_day_summary(day, money, energy, mood, reputation)
-
-    return money, energy, mood, reputation
-   
-   if __name__ == "__main__":
     main()
-  
