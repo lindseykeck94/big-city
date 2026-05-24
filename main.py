@@ -16,6 +16,13 @@ def show_stats(player_name, money, energy, mood, reputation):
     print(f"Reputation: {reputation}")
 
 
+def show_relationships(norma_relationship, greta_relationship, lou_relationship):
+    print("\n--- Relationships ---")
+    print(f"Norma: {norma_relationship}")
+    print(f"Greta: {greta_relationship}")
+    print(f"Lou: {lou_relationship}")
+
+
 def choose_location():
     print("\nWhere would you like to go?")
     print("1. Apartment")
@@ -71,7 +78,7 @@ def apartment_actions(money, energy, mood, reputation):
     return money, energy, mood, reputation
 
 
-def coffee_shop_actions(money, energy, mood, reputation):
+def coffee_shop_actions(money, energy, mood, reputation, norma_relationship):
     print("\nWhat would you like to do at the coffee shop?")
     print("1. Buy coffee")
     print("2. Chat with Norma")
@@ -88,10 +95,11 @@ def coffee_shop_actions(money, energy, mood, reputation):
         energy -= 5
         mood += 3
         reputation += 2
+        norma_relationship += 5
     else:
         print("\nYou hover near the counter awkwardly and then leave.")
 
-    return money, energy, mood, reputation
+    return money, energy, mood, reputation, norma_relationship
 
 
 def temp_agency_actions(money, energy, mood, reputation):
@@ -160,7 +168,7 @@ def park_subway_actions(money, energy, mood, reputation):
     return money, energy, mood, reputation
 
 
-def music_venue_actions(money, energy, mood, reputation):
+def music_venue_actions(money, energy, mood, reputation, greta_relationship):
     print("\nWhat would you like to do at the music venue?")
     print("1. Go to a concert")
     print("2. Talk to Greta")
@@ -177,13 +185,23 @@ def music_venue_actions(money, energy, mood, reputation):
         energy -= 5
         mood += 8
         reputation += 2
+        greta_relationship += 5
     else:
         print("\nYou linger near the door and leave before the first song starts.")
 
-    return money, energy, mood, reputation
+    return money, energy, mood, reputation, greta_relationship
 
 
-def choose_activity(time_slot, money, energy, mood, reputation):
+def choose_activity(
+    time_slot,
+    money,
+    energy,
+    mood,
+    reputation,
+    norma_relationship,
+    greta_relationship,
+    lou_relationship,
+):
     print(f"\n--- {time_slot} ---")
 
     location = choose_location()
@@ -192,40 +210,64 @@ def choose_activity(time_slot, money, energy, mood, reputation):
         money, energy, mood, reputation = apartment_actions(
             money, energy, mood, reputation
         )
+
     elif location == "Coffee Shop":
-        money, energy, mood, reputation = coffee_shop_actions(
-            money, energy, mood, reputation
+        money, energy, mood, reputation, norma_relationship = coffee_shop_actions(
+            money, energy, mood, reputation, norma_relationship
         )
+
     elif location == "Temp Agency":
         money, energy, mood, reputation = temp_agency_actions(
             money, energy, mood, reputation
         )
+
     elif location == "Bookstore":
         money, energy, mood, reputation = bookstore_actions(
             money, energy, mood, reputation
         )
+
     elif location == "Park/Subway Station":
         money, energy, mood, reputation = park_subway_actions(
             money, energy, mood, reputation
         )
+
     elif location == "Music Venue":
-        money, energy, mood, reputation = music_venue_actions(
-            money, energy, mood, reputation
+        money, energy, mood, reputation, greta_relationship = music_venue_actions(
+            money, energy, mood, reputation, greta_relationship
         )
+
     else:
         print("\nYou lose time wandering without a clear plan.")
         energy -= 5
         mood -= 3
+        reputation -= 1
 
     money = clamp_stat(money, 0, 9999)
     energy = clamp_stat(energy, 0, 100)
     mood = clamp_stat(mood, 0, 100)
     reputation = clamp_stat(reputation, -100, 100)
 
-    return money, energy, mood, reputation
+    return (
+        money,
+        energy,
+        mood,
+        reputation,
+        norma_relationship,
+        greta_relationship,
+        lou_relationship,
+    )
 
 
-def show_day_summary(day, money, energy, mood, reputation):
+def show_day_summary(
+    day,
+    money,
+    energy,
+    mood,
+    reputation,
+    norma_relationship,
+    greta_relationship,
+    lou_relationship,
+):
     print(f"\nDay {day} ends.")
     print("You look out at the city lights and wonder what tomorrow will bring.")
 
@@ -235,32 +277,107 @@ def show_day_summary(day, money, energy, mood, reputation):
     print(f"Mood: {mood}")
     print(f"Reputation: {reputation}")
 
+    show_relationships(norma_relationship, greta_relationship, lou_relationship)
 
-def play_day(day, player_name, money, energy, mood, reputation):
+
+def play_day(
+    day,
+    player_name,
+    money,
+    energy,
+    mood,
+    reputation,
+    norma_relationship,
+    greta_relationship,
+    lou_relationship,
+):
     print("\n====================")
     print(f"Day {day}")
     print("====================")
 
     show_stats(player_name, money, energy, mood, reputation)
+    show_relationships(norma_relationship, greta_relationship, lou_relationship)
 
-    money, energy, mood, reputation = choose_activity(
-        "Morning", money, energy, mood, reputation
+    (
+        money,
+        energy,
+        mood,
+        reputation,
+        norma_relationship,
+        greta_relationship,
+        lou_relationship,
+    ) = choose_activity(
+        "Morning",
+        money,
+        energy,
+        mood,
+        reputation,
+        norma_relationship,
+        greta_relationship,
+        lou_relationship,
     )
     show_stats(player_name, money, energy, mood, reputation)
 
-    money, energy, mood, reputation = choose_activity(
-        "Afternoon", money, energy, mood, reputation
+    (
+        money,
+        energy,
+        mood,
+        reputation,
+        norma_relationship,
+        greta_relationship,
+        lou_relationship,
+    ) = choose_activity(
+        "Afternoon",
+        money,
+        energy,
+        mood,
+        reputation,
+        norma_relationship,
+        greta_relationship,
+        lou_relationship,
     )
     show_stats(player_name, money, energy, mood, reputation)
 
-    money, energy, mood, reputation = choose_activity(
-        "Evening", money, energy, mood, reputation
+    (
+        money,
+        energy,
+        mood,
+        reputation,
+        norma_relationship,
+        greta_relationship,
+        lou_relationship,
+    ) = choose_activity(
+        "Evening",
+        money,
+        energy,
+        mood,
+        reputation,
+        norma_relationship,
+        greta_relationship,
+        lou_relationship,
     )
     show_stats(player_name, money, energy, mood, reputation)
 
-    show_day_summary(day, money, energy, mood, reputation)
+    show_day_summary(
+        day,
+        money,
+        energy,
+        mood,
+        reputation,
+        norma_relationship,
+        greta_relationship,
+        lou_relationship,
+    )
 
-    return money, energy, mood, reputation
+    return (
+        money,
+        energy,
+        mood,
+        reputation,
+        norma_relationship,
+        greta_relationship,
+        lou_relationship,
+    )
 
 
 def main():
@@ -275,22 +392,48 @@ def main():
     reputation = 0
     day = 1
 
+    norma_relationship = 0
+    greta_relationship = 0
+    lou_relationship = 0
+
     print(f"\nWelcome to the city, {player_name}.")
 
-    while day <= 14:
-        money, energy, mood, reputation = play_day(
-            day, player_name, money, energy, mood, reputation
+    while day <= 2:
+        (
+            money,
+            energy,
+            mood,
+            reputation,
+            norma_relationship,
+            greta_relationship,
+            lou_relationship,
+        ) = play_day(
+            day,
+            player_name,
+            money,
+            energy,
+            mood,
+            reputation,
+            norma_relationship,
+            greta_relationship,
+            lou_relationship,
         )
 
         day += 1
 
     print("\nFourteen days pass.")
     print("Your first chapter in Big City comes to an end.")
-    print("\nFinal stats:")
+
+    print("\n--- Final Stats ---")
     print(f"Money: ${money}")
     print(f"Energy: {energy}")
     print(f"Mood: {mood}")
     print(f"Reputation: {reputation}")
+
+    print("\n--- Final Relationships ---")
+    print(f"Norma: {norma_relationship}")
+    print(f"Greta: {greta_relationship}")
+    print(f"Lou: {lou_relationship}")
 
 
 if __name__ == "__main__":
