@@ -6,6 +6,16 @@ def clamp_stat(value, minimum, maximum):
     else:
         return value
 
+def get_friendship_level(relationship_score):
+    if relationship_score >= 30:
+        return "Close Friend"
+    elif relationship_score >= 20:
+        return "Friend"
+    elif relationship_score >= 10:
+        return "Acquaintance"
+    else:
+        return "Stranger"
+
 
 def show_stats(player_name, money, energy, mood, reputation):
     print("\n--- Player Stats ---")
@@ -17,11 +27,14 @@ def show_stats(player_name, money, energy, mood, reputation):
 
 
 def show_relationships(norma_relationship, greta_relationship, lou_relationship):
-    print("\n--- Relationships ---")
-    print(f"Norma: {norma_relationship}")
-    print(f"Greta: {greta_relationship}")
-    print(f"Lou: {lou_relationship}")
+    norma_level = get_friendship_level(norma_relationship)
+    greta_level = get_friendship_level(greta_relationship)
+    lou_level = get_friendship_level(lou_relationship)
 
+    print("\n--- Relationships ---")
+    print(f"Norma: {norma_relationship} - {norma_level}")
+    print(f"Greta: {greta_relationship} - {greta_level}")
+    print(f"Lou: {lou_relationship} - {lou_level}")
 
 def choose_location():
     print("\nWhere would you like to go?")
