@@ -411,7 +411,7 @@ def main():
 
     print(f"\nWelcome to the city, {player_name}.")
 
-    while day <= 2:
+    while day <= 14:
         (
             money,
             energy,
