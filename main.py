@@ -6,6 +6,7 @@ def clamp_stat(value, minimum, maximum):
     else:
         return value
 
+
 def get_friendship_level(relationship_score):
     if relationship_score >= 30:
         return "Close Friend"
@@ -15,6 +16,19 @@ def get_friendship_level(relationship_score):
         return "Acquaintance"
     else:
         return "Stranger"
+
+
+def get_norma_dialogue(norma_relationship):
+    friendship_level = get_friendship_level(norma_relationship)
+
+    if friendship_level == "Close Friend":
+        return "Norma saves you a seat before you even make it to the counter. Somehow, she already knows you need tea."
+    elif friendship_level == "Friend":
+        return "Norma pats the chair beside her and asks how you have really been adjusting to the city."
+    elif friendship_level == "Acquaintance":
+        return "Norma waves you over like she expected to see you today."
+    else:
+        return "Norma gives you a polite smile over her tea and offers a piece of advice you did not ask for."
 
 
 def show_stats(player_name, money, energy, mood, reputation):
@@ -35,6 +49,7 @@ def show_relationships(norma_relationship, greta_relationship, lou_relationship)
     print(f"Norma: {norma_relationship} - {norma_level}")
     print(f"Greta: {greta_relationship} - {greta_level}")
     print(f"Lou: {lou_relationship} - {lou_level}")
+
 
 def choose_location():
     print("\nWhere would you like to go?")
@@ -104,7 +119,7 @@ def coffee_shop_actions(money, energy, mood, reputation, norma_relationship):
         energy += 10
         mood += 5
     elif choice == "2":
-        print("\nNorma smiles over her tea and gives you advice you did not ask for, but probably needed.")
+        print(f"\n{get_norma_dialogue(norma_relationship)}")
         energy -= 5
         mood += 3
         reputation += 2
@@ -411,7 +426,7 @@ def main():
 
     print(f"\nWelcome to the city, {player_name}.")
 
-    while day <=2:
+    while day <= 14:
         (
             money,
             energy,
@@ -434,7 +449,7 @@ def main():
 
         day += 1
 
-    print("\nFourteen days pass.")
+    print("\nThe demo period ends.")
     print("Your first chapter in Big City comes to an end.")
 
     print("\n--- Final Stats ---")
