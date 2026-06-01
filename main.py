@@ -30,6 +30,17 @@ def get_norma_dialogue(norma_relationship):
     else:
         return "Norma gives you a polite smile over her tea and offers a piece of advice you did not ask for."
 
+def get_greta_dialogue(greta_relationship):
+    friendship_level = get_friendship_level(greta_relationship)
+
+    if friendship_level == "Close Friend":
+        return "Greta throws an arm around your shoulders and pulls you toward the front like you belong there."
+    elif friendship_level == "Friend":
+        return "Greta lights up when she sees you and immediately starts telling you about a band you absolutely need to hear."
+    elif friendship_level == "Acquaintance":
+        return "Greta recognizes you from the last show and gives you an approving nod."
+    else:
+        return "Greta grins and talks your ear off about bands you've never heard of."
 
 def show_stats(player_name, money, energy, mood, reputation):
     print("\n--- Player Stats ---")
@@ -209,7 +220,7 @@ def music_venue_actions(money, energy, mood, reputation, greta_relationship):
         energy -= 15
         mood += 20
     elif choice == "2":
-        print("\nGreta grins and talks your ear off about bands you've never heard of.")
+        print(f"\n{get_greta_dialogue(greta_relationship)}")
         energy -= 5
         mood += 8
         reputation += 2
