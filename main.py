@@ -30,6 +30,7 @@ def get_norma_dialogue(norma_relationship):
     else:
         return "Norma gives you a polite smile over her tea and offers a piece of advice you did not ask for."
 
+
 def get_greta_dialogue(greta_relationship):
     friendship_level = get_friendship_level(greta_relationship)
 
@@ -41,6 +42,7 @@ def get_greta_dialogue(greta_relationship):
         return "Greta recognizes you from the last show and gives you an approving nod."
     else:
         return "Greta grins and talks your ear off about bands you've never heard of."
+
 
 def show_stats(player_name, money, energy, mood, reputation):
     print("\n--- Player Stats ---")
@@ -419,6 +421,54 @@ def play_day(
     )
 
 
+def get_ending(
+    money,
+    mood,
+    reputation,
+    norma_relationship,
+    greta_relationship,
+    lou_relationship,
+):
+    total_relationships = norma_relationship + greta_relationship + lou_relationship
+
+    if money < 600:
+        return (
+            "The Eviction Notice Ending",
+            "You made memories in Big City, but memories do not pay rent. "
+            "The envelope under your door says what your bank account already knew.",
+        )
+    elif mood <= 20:
+        return (
+            "The Burnout Ending",
+            "You survived the city by pushing yourself too hard. "
+            "You made it through the demo, but somewhere along the way, you forgot to breathe.",
+        )
+    elif reputation >= 60:
+        return (
+            "The Overachiever Ending",
+            "Your name starts getting passed around offices and agencies. "
+            "Big City has not embraced you exactly, but it has noticed you.",
+        )
+    elif total_relationships >= 40:
+        return (
+            "The Neighborhood Hero Ending",
+            "You came to Big City alone, but you did not stay that way. "
+            "People know your name now, and better yet, they are happy to see you.",
+        )
+    elif mood >= 70 and total_relationships >= 25:
+        return (
+            "The Talk of the City Ending",
+            "Somehow, between subway delays, overpriced coffee, and late nights, "
+            "you found your rhythm. Big City feels a little less impossible now.",
+        )
+    else:
+        return (
+            "The Fresh Start Ending",
+            "You are not settled yet, but you are still here. "
+            "For now, that is enough. Tomorrow, the city will ask again.",
+        )
+
+
 def main():
     print("Welcome to Big City.")
     print("You have fourteen days to build a life.\n")
@@ -437,7 +487,7 @@ def main():
 
     print(f"\nWelcome to the city, {player_name}.")
 
-    while day <= 14:
+    while day <= 2:
         (
             money,
             energy,
@@ -473,6 +523,19 @@ def main():
     print(f"Norma: {norma_relationship}")
     print(f"Greta: {greta_relationship}")
     print(f"Lou: {lou_relationship}")
+
+    ending_title, ending_description = get_ending(
+        money,
+        mood,
+        reputation,
+        norma_relationship,
+        greta_relationship,
+        lou_relationship,
+    )
+
+    print("\n--- Ending ---")
+    print(ending_title)
+    print(ending_description)
 
 
 if __name__ == "__main__":
