@@ -1,3 +1,5 @@
+DEMO_DAYS = 2
+
 def clamp_stat(value, minimum, maximum):
     if value < minimum:
         return minimum
@@ -431,7 +433,7 @@ def get_ending(
 ):
     total_relationships = norma_relationship + greta_relationship + lou_relationship
 
-    if money < 600:
+    if money < 300:
         return (
             "The Eviction Notice Ending",
             "You made memories in Big City, but memories do not pay rent. "
@@ -471,7 +473,7 @@ def get_ending(
 
 def main():
     print("Welcome to Big City.")
-    print("You have fourteen days to build a life.\n")
+    print(f"You have {DEMO_DAYS} days to build a life.\n")
 
     player_name = input("What is your name? ")
 
@@ -487,7 +489,7 @@ def main():
 
     print(f"\nWelcome to the city, {player_name}.")
 
-    while day <= 14:
+    while day <= DEMO_DAYS:
         (
             money,
             energy,
