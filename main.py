@@ -1,4 +1,5 @@
 DEMO_DAYS = 2
+RENT_GOAL = 600
 
 def clamp_stat(value, minimum, maximum):
     if value < minimum:
@@ -433,11 +434,11 @@ def get_ending(
 ):
     total_relationships = norma_relationship + greta_relationship + lou_relationship
 
-    if money < 300:
+    if money < RENT_GOAL:
         return (
             "The Eviction Notice Ending",
-            "You made memories in Big City, but memories do not pay rent. "
-            "The envelope under your door says what your bank account already knew.",
+        "You made memories in Big City, but memories do not pay rent. "
+        f"The envelope under your door says what your bank account already knew: rent was ${RENT_GOAL}.",
         )
     elif mood <= 20:
         return (
