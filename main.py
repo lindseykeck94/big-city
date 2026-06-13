@@ -1,5 +1,6 @@
 DEMO_DAYS = 2
 RENT_GOAL = 600
+STARTING_MONEY = 100
 
 def clamp_stat(value, minimum, maximum):
     if value < minimum:
@@ -478,7 +479,7 @@ def main():
 
     player_name = input("What is your name? ")
 
-    money = 100
+    money = STARTING_MONEY
     energy = 100
     mood = 50
     reputation = 0
