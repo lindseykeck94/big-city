@@ -5,6 +5,13 @@ STARTING_ENERGY = 100
 STARTING_MOOD = 50
 STARTING_REPUTATION = 0
 
+MIN_MONEY = 0
+MAX_MONEY = 9999
+MIN_STAT = 0
+MAX_STAT = 100
+MIN_REPUTATION = -100
+MAX_REPUTATION = 100
+
 def clamp_stat(value, minimum, maximum):
     if value < minimum:
         return minimum
@@ -290,10 +297,10 @@ def choose_activity(
         mood -= 3
         reputation -= 1
 
-    money = clamp_stat(money, 0, 9999)
-    energy = clamp_stat(energy, 0, 100)
-    mood = clamp_stat(mood, 0, 100)
-    reputation = clamp_stat(reputation, -100, 100)
+    money = clamp_stat(money, MIN_MONEY, MAX_MONEY)
+    energy = clamp_stat(energy, MIN_STAT, MAX_STAT)
+    mood = clamp_stat(mood, MIN_STAT, MAX_STAT)
+    reputation = clamp_stat(reputation, MIN_REPUTATION, MAX_REPUTATION)
 
     return (
         money,
