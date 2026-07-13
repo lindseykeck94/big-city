@@ -1,3 +1,5 @@
+import json
+
 DEMO_DAYS = 2
 RENT_GOAL = 600
 STARTING_MONEY = 100
