@@ -12,6 +12,8 @@ MAX_STAT = 100
 MIN_REPUTATION = -100
 MAX_REPUTATION = 100
 
+SAVE_FILE = "save_file.json"
+
 def clamp_stat(value, minimum, maximum):
     if value < minimum:
         return minimum
