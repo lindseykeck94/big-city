@@ -81,6 +81,33 @@ def show_relationships(norma_relationship, greta_relationship, lou_relationship)
     print(f"Greta: {greta_relationship} - {greta_level}")
     print(f"Lou: {lou_relationship} - {lou_level}")
 
+def save_game(
+    player_name,
+    day,
+    money,
+    energy,
+    mood,
+    reputation,
+    norma_relationship,
+    greta_relationship,
+    lou_relationship,
+):
+    save_data = {
+        "player_name": player_name,
+        "day": day,
+        "money": money,
+        "energy": energy,
+        "mood": mood,
+        "reputation": reputation,
+        "norma_relationship": norma_relationship,
+        "greta_relationship": greta_relationship,
+        "lou_relationship": lou_relationship,
+    }
+
+    with open(SAVE_FILE, "w") as file:
+        json.dump(save_data, file, indent=4)
+
+    print("\nGame saved.")
 
 def choose_location():
     print("\nWhere would you like to go?")
@@ -418,6 +445,18 @@ def play_day(
     show_stats(player_name, money, energy, mood, reputation)
 
     show_day_summary(
+        day,
+        money,
+        energy,
+        mood,
+        reputation,
+        norma_relationship,
+        greta_relationship,
+        lou_relationship,
+    )
+
+    save_game(
+        player_name,
         day,
         money,
         energy,
